@@ -31,7 +31,7 @@ pub struct SubTypes {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Typei {
     // lang: LangChoices,  // required
-    pub type_choice: TypeChoices,  // required
+    // pub type_choice: TypeChoices,  // required
     // contractAddress: address,
     // source: bytes32,
     pub name: String,  // required

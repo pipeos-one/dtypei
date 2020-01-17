@@ -24,7 +24,7 @@ pub fn typedinterface() -> Vec<dtypei::Typei> {
 The `dtypei_attr` macro will populate the `typedinterface` function with the interface objects. E.g.:
 
 ```
-[Typei { type_choice: PureFunction, name: "sum", types: [SubTypes { name: "i32", label: "n1", dimensions: [] }, SubTypes { name: "i32", label: "n2", dimensions: [] }], outputs: [SubTypes { name: "unknown", label: "i32", dimensions: [] }] }]
+[Typei { name: "sum", types: [SubTypes { name: "i32", label: "n1", dimensions: [] }, SubTypes { name: "i32", label: "n2", dimensions: [] }], outputs: [SubTypes { name: "unknown", label: "i32", dimensions: [] }] }]
 ```
 
 When using `#[wasm_bindgen]`, use this macro order:

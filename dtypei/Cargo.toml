@@ -1,0 +1,12 @@
+[package]
+name = "dtypei"
+version = "0.1.0"
+authors = ["Loredana <loredana.cirstea@gmail.com>"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = { version = "0.2", features = ["serde-serialize"] }
+serde = { version = "1.0", features = ["derive"] }

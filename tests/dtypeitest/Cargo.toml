@@ -1,0 +1,10 @@
+[package]
+name = "dtypeitest"
+version = "0.1.0"
+authors = ["Loredana <loredana.cirstea@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+dtypei-derive = { path = "../../dtypei-derive" }
+dtypei = { path = "../../dtypei" }
+mathi = { path = "../mathi" }

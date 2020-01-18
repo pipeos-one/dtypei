@@ -49,7 +49,8 @@ Wasm test:
 ```
 cd tests/mathi
 wasm-pack build
-cd www
+
+cd tests/www
 npm install
 npm run start
 ```

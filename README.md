@@ -56,3 +56,5 @@ npm run start
 ```
 
 Check browser logs.
+
+GPLv3 - see `./LICENSE`

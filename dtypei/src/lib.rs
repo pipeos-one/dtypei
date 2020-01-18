@@ -36,7 +36,7 @@ pub struct Typei {
     // source: bytes32,
     pub name: String,  // required
     // required types
-    pub types: Vec<SubTypes>,  // required
+    pub inputs: Vec<SubTypes>,  // required
     // optional types
     // optionals: SubTypes[],
     // function outputs

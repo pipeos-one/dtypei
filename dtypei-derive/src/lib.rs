@@ -115,7 +115,7 @@ pub fn dtypei_attr(args: TokenStream, input: TokenStream) -> TokenStream {
     let dtype_func = quote!(
         dtypei::Typei {
             name: String::from(#nametoken),
-            types: vec![
+            inputs: vec![
                 #(#dtype_inputs),*
             ],
             outputs: #dtype_outputs,

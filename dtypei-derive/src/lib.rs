@@ -99,8 +99,8 @@ pub fn dtypei_attr(args: TokenStream, input: TokenStream) -> TokenStream {
             quote!(
                 vec![
                     dtypei::SubTypes {
-                        name: String::from("unknown"),
-                        label: String::from(#typetoken),
+                        name: String::from(#typetoken),
+                        label: String::from("unknown"),
                         dimensions: Vec::new(),
                     }
                 ]

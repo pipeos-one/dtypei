@@ -12,7 +12,9 @@ use syn::token::Comma;
 
 // use dtypei;
 
-pub fn parse_function(function: &ItemFn) -> proc_macro2::TokenStream {
+use crate::utils;
+
+pub fn parse(function: &ItemFn) -> proc_macro2::TokenStream {
     // eprintln!("function: {}", quote!(#function));
 
     // function: attrs, vis, sig, block
@@ -46,12 +48,12 @@ pub fn parse_function(function: &ItemFn) -> proc_macro2::TokenStream {
 
     let dtype_inputs = parse_inputs(&function.sig.inputs);
 
-    let nametoken = quotify(quote!(#ident));
+    let nametoken = utils::quotify(quote!(#ident));
 
     let dtype_outputs = match output {
         ReturnType::Default => quote!(-> []),
         ReturnType::Type(_,  out) => {
-            let typetoken = quotify(quote!(#out));
+            let typetoken = utils::quotify(quote!(#out));
             quote!(
                 vec![
                     dtypei::SubTypes {
@@ -95,8 +97,8 @@ fn parse_inputs(inputs: &Punctuated<FnArg, Comma>) -> Vec<proc_macro2::TokenStre
                 // eprintln!("colon_token: {}", quote!(#colon_token));
                 // eprintln!("ty: {}", quote!(#ty));
 
-                let tpattoken = quotify(quote!(#pat));
-                let tytoken = quotify(quote!(#ty));
+                let tpattoken = utils::quotify(quote!(#pat));
+                let tytoken = utils::quotify(quote!(#ty));
 
                 dtype_inputs.push(quote!(
                     dtypei::SubTypes {
@@ -117,9 +119,4 @@ fn parse_inputs(inputs: &Punctuated<FnArg, Comma>) -> Vec<proc_macro2::TokenStre
     }
 
     dtype_inputs
-}
-
-fn quotify(token: proc_macro2::TokenStream) -> proc_macro2::TokenStream {
-    let typestr = format!("\"{}\"", quote!(#token));
-    typestr.parse().unwrap()
 }

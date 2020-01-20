@@ -62,8 +62,8 @@ fn parse_variants(inputs: &Punctuated<Variant, Comma>) -> Vec<proc_macro2::Token
         eprintln!("fields: {}", quote!(#fields));
         // eprintln!("variant: {}", quote!(#discriminant));
         let nametoken = utils::quotify(quote!(#ident));
-        // let tytoken = utils::quotify(quote!(#ty));
 
+        // TODO - more complex enums; wasm_bidgen is a bottleneck here
         // let dtype_inputss = fields_parse::parse(&fields);
         // eprintln!("dtype_inputss: {}", quote!(
         //     #(#dtype_inputss),*
@@ -71,7 +71,7 @@ fn parse_variants(inputs: &Punctuated<Variant, Comma>) -> Vec<proc_macro2::Token
 
         dtype_inputs.push(quote!(
             dtypei::SubTypes {
-                name: String::from("enum_variant"),
+                name: String::from("u8"),
                 label: String::from(#nametoken),
                 dimensions: Vec::new(),
             }

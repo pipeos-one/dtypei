@@ -8,8 +8,8 @@ fn main() {
     println!("sub 8 - 2 = {}", mathi::sub(8, 2));
 
     eprintln!("typedinterface lib2 = {:?}", lib2::typedinterface());
-    println!("sum 2 + 5 = {}", lib2::sum(2, 5));
-    println!("sub 8 - 2 = {}", lib2::sub(8, 2));
+    println!("sum 2 + 5 = {}", lib2::mod8::u8::u8::sum_u8(2, 5));
+    println!("sub 8 - 2 = {}", lib2::mod16::i16::i16::sub_i16(8, 2));
 
     eprintln!("typedinterface complex = {:?}", complex::typedinterface());
 

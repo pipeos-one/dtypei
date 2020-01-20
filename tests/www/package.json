@@ -25,7 +25,10 @@
   },
   "homepage": "https://github.com/rustwasm/create-wasm-app#readme",
   "dependencies": {
-    "mathi": "file:../mathi/pkg"
+    "@pipeos/dtype-controls": "file:../../../pipeline/packages/packages/dtype-controls",
+    "mathi": "file:../mathi/pkg",
+    "lib2": "file:../lib2/pkg",
+    "complex": "file:../complex/pkg"
   },
   "devDependencies": {
     "hello-wasm-pack": "^0.1.0",

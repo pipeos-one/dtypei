@@ -3,22 +3,22 @@ extern crate wasm_bindgen;
 // use wasm_bindgen::prelude::*;
 use serde::{Deserialize, Serialize};
 
-#[derive(Copy, Clone, Debug, Serialize, Deserialize)]
-pub enum TypeRelation { Has, Link, Bytes }
+// #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
+// pub enum TypeRelation { Has, Link, Bytes }
 
-#[derive(Copy, Clone, Debug, Serialize, Deserialize)]
-pub enum LangChoices { Solidity, JavaScript, Python }
+// #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
+// pub enum LangChoices { Solidity, JavaScript, Python, Rust }
 
-#[derive(Copy, Clone, Debug, Serialize, Deserialize)]
-pub enum TypeChoices {
-    BaseType,
-    PayableFunction,
-    StateFunction,
-    ViewFunction,
-    PureFunction,
-    Event,
-    MappingType,
-}
+// #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
+// pub enum TypeChoices {
+//     BaseType,
+//     PayableFunction,
+//     StateFunction,
+//     ViewFunction,
+//     PureFunction,
+//     Event,
+//     MappingType,
+// }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct SubTypes {
@@ -32,6 +32,7 @@ pub struct SubTypes {
 pub struct Typei {
     // lang: LangChoices,  // required
     // pub type_choice: TypeChoices,  // required
+    pub type_choice: String,  // TODO: enum
     // contractAddress: address,
     // source: bytes32,
     pub name: String,  // required

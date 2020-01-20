@@ -12,27 +12,30 @@ pub fn parse(token: &ItemEnum) -> proc_macro2::TokenStream {
     // function: attrs, vis, enum_token, ident, generics, brace_token, variants
 
     // let attrs = &token.attrs;
-    let vis = &token.vis;
+    // let vis = &token.vis;
+    // let generics = &token.generics;
+    // let brace_token = &token.brace_token;
+
+    // eprintln!("vis: {}", quote!(#vis));
+    // eprintln!("attrs: {}", quote!(#attrs));
+    // eprintln!("enum_token: {}", quote!(#enum_token));
+    // eprintln!("ident: {}", quote!(#ident));
+    // eprintln!("generics: {}", quote!(#generics));
+    // eprintln!("brace_token: {}", quote!(#brace_token));
+    // eprintln!("variants: {}", quote!(#variants));
+
     let enum_token = &token.enum_token;
     let ident = &token.ident;
-    let generics = &token.generics;
-    // let brace_token = &token.brace_token;
     let variants = &token.variants;
 
-    eprintln!("vis: {}", quote!(#vis));
-    // eprintln!("attrs: {}", quote!(#attrs));
-    eprintln!("enum_token: {}", quote!(#enum_token));
-    eprintln!("ident: {}", quote!(#ident));
-    eprintln!("generics: {}", quote!(#generics));
-    // eprintln!("brace_token: {}", quote!(#brace_token));
-    eprintln!("variants: {}", quote!(#variants));
-
-    let dtype_inputs = parse_variants(&variants);
     let nametoken = utils::quotify(quote!(#ident));
+    let typetoken = utils::quotify(quote!(#enum_token));
+    let dtype_inputs = parse_variants(&variants);
 
     let dtype_struct = quote!(
         dtypei::Typei {
             name: String::from(#nametoken),
+            type_choice: String::from(#typetoken),
             // type_choice: dtypei::TypeChoices::PureFunction,
             inputs: vec![
                 #(#dtype_inputs),*

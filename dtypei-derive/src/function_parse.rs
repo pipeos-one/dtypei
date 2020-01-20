@@ -31,10 +31,8 @@ pub fn parse(function: &ItemFn) -> proc_macro2::TokenStream {
     // let unsafety = &sig.unsafety;
     // let abi = &sig.abi;
     // let fn_token = &sig.fn_token;
-    let ident = &function.sig.ident;
     // let paren_token = &sig.paren_token;
     // let variadic = &sig.variadic;
-    let output = &function.sig.output;
 
     // eprintln!("constness: {}", quote!(#constness));
     // eprintln!("asyncness: {}", quote!(#asyncness));
@@ -46,9 +44,14 @@ pub fn parse(function: &ItemFn) -> proc_macro2::TokenStream {
     // eprintln!("variadic: {}", quote!(#variadic));
     // eprintln!("output: {}", quote!(#output));
 
-    let dtype_inputs = parse_inputs(&function.sig.inputs);
+    let ident = &function.sig.ident;
+    let output = &function.sig.output;
+    let fn_token = &function.sig.fn_token;
 
     let nametoken = utils::quotify(quote!(#ident));
+    let fntypetoken = utils::quotify(quote!(#fn_token));
+
+    let dtype_inputs = parse_inputs(&function.sig.inputs);
 
     let dtype_outputs = match output {
         ReturnType::Default => quote!(-> []),
@@ -69,6 +72,7 @@ pub fn parse(function: &ItemFn) -> proc_macro2::TokenStream {
     let dtype_func = quote!(
         dtypei::Typei {
             name: String::from(#nametoken),
+            type_choice: String::from(#fntypetoken),
             // type_choice: dtypei::TypeChoices::PureFunction,
             inputs: vec![
                 #(#dtype_inputs),*

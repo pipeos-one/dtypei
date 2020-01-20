@@ -18,27 +18,30 @@ pub fn parse(structt: &ItemStruct) -> proc_macro2::TokenStream {
     // function: attrs, vis, struct_token, ident, generics, fields, semi_token
 
     // let attrs = &structt.attrs;
-    let vis = &structt.vis;
+    // let vis = &structt.vis;
+    // let generics = &structt.generics;
+    // let semi_token = &structt.semi_token;
+
+    // eprintln!("vis: {}", quote!(#vis));
+    // eprintln!("attrs: {}", quote!(#attrs));
+    // eprintln!("struct_token: {}", quote!(#struct_token));
+    // eprintln!("ident: {}", quote!(#ident));
+    // eprintln!("generics: {}", quote!(#generics));
+    // eprintln!("fields: {}", quote!(#fields));
+    // eprintln!("semi_token: {}", quote!(#semi_token));
+
     let struct_token = &structt.struct_token;
     let ident = &structt.ident;
-    let generics = &structt.generics;
     let fields = &structt.fields;
-    let semi_token = &structt.semi_token;
 
-    eprintln!("vis: {}", quote!(#vis));
-    // eprintln!("attrs: {}", quote!(#attrs));
-    eprintln!("struct_token: {}", quote!(#struct_token));
-    eprintln!("ident: {}", quote!(#ident));
-    eprintln!("generics: {}", quote!(#generics));
-    eprintln!("fields: {}", quote!(#fields));
-    eprintln!("semi_token: {}", quote!(#semi_token));
-
-    let dtype_inputs = fields_parse::parse(&fields);
     let nametoken = utils::quotify(quote!(#ident));
+    let typetoken = utils::quotify(quote!(#struct_token));
+    let dtype_inputs = fields_parse::parse(&fields);
 
     let dtype_struct = quote!(
         dtypei::Typei {
             name: String::from(#nametoken),
+            type_choice: String::from(#typetoken),
             // type_choice: dtypei::TypeChoices::PureFunction,
             inputs: vec![
                 #(#dtype_inputs),*

@@ -5,6 +5,12 @@ Build interface description objects for your Rust exports.
 This is an in-work project and the current version has no safeness guarantees.
 Suggestions and contributions are welcome.
 
+Short video presentation: https://youtu.be/tkbo-cnlCKk - using `dtypei` built interfaces to create programmatic UIs & enforce proper type checking for Wasm modules, in JavaScript.
+
+## Usage
+
+You need both https://crates.io/crates/dtypei and https://crates.io/crates/dtypei-derive.
+
 ```
 #[macro_use]
 extern crate dtypei_derive;
@@ -56,6 +62,8 @@ The `dtypei_attr` macro will populate the `typedinterface` function with the int
 [Typei { name: "sum", inputs: [SubTypes { name: "i32", label: "n1", dimensions: [] }, SubTypes { name: "i32", label: "n2", dimensions: [] }], outputs: [SubTypes { name: "sum", label: "i32", dimensions: [] }] }]
 ```
 
+### Wasm Support
+
 When using `#[wasm_bindgen]`, use this macro order:
 ```
 #[wasm_bindgen]
@@ -64,6 +72,8 @@ pub fn sum(n1: i32, n2: i32) -> i32 {
     n1 + n2
 }
 ```
+
+### Examples
 
 Check `./tests` examples.
 

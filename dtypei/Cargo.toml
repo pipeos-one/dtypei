@@ -1,5 +1,12 @@
 [package]
 name = "dtypei"
+description = "Introspection - interface description for your Rust exports"
+documentation = "https://github.com/pipeos-one/dtypei"
+homepage = "https://github.com/pipeos-one/dtypei"
+repository = "https://github.com/pipeos-one/dtypei"
+readme = "https://github.com/pipeos-one/dtypei/README.md"
+keywords = ["dtypei", "introspection", "interface"]
+license = "GPL-3.0-or-later"
 version = "0.1.0"
 authors = ["Loredana <loredana.cirstea@gmail.com>"]
 edition = "2018"

@@ -18,5 +18,5 @@ proc-macro = true
 proc-macro2 = "1.0"
 syn = { version = "1.0.13", features = ["full", "derive"] }
 quote = "1.0.2"
-dtypei = { path = "../dtypei" }
+dtypei = "0.0.1"
 serde_json = "1.0"

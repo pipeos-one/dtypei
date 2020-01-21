@@ -1,34 +1,15 @@
 extern crate proc_macro;
 
-// use crate::proc_macro::TokenStream;
-// use proc_macro2::Span;
 use quote::quote;
 use syn;
 
-use syn::{ItemStruct}; //, Fields, FieldsNamed, FieldsUnnamed, Field};
-// use syn::punctuated::{Punctuated};
-// use syn::token::Comma;
-
-// use dtypei;
+use syn::{ItemStruct};
 
 use crate::utils;
 use crate::fields_parse;
 
 pub fn parse(structt: &ItemStruct) -> proc_macro2::TokenStream {
-    // function: attrs, vis, struct_token, ident, generics, fields, semi_token
-
-    // let attrs = &structt.attrs;
-    // let vis = &structt.vis;
-    // let generics = &structt.generics;
-    // let semi_token = &structt.semi_token;
-
-    // eprintln!("vis: {}", quote!(#vis));
-    // eprintln!("attrs: {}", quote!(#attrs));
-    // eprintln!("struct_token: {}", quote!(#struct_token));
-    // eprintln!("ident: {}", quote!(#ident));
-    // eprintln!("generics: {}", quote!(#generics));
-    // eprintln!("fields: {}", quote!(#fields));
-    // eprintln!("semi_token: {}", quote!(#semi_token));
+    // attrs, vis, struct_token, ident, generics, fields, semi_token
 
     let struct_token = &structt.struct_token;
     let ident = &structt.ident;
@@ -42,7 +23,6 @@ pub fn parse(structt: &ItemStruct) -> proc_macro2::TokenStream {
         dtypei::Typei {
             name: String::from(#nametoken),
             type_choice: String::from(#typetoken),
-            // type_choice: dtypei::TypeChoices::PureFunction,
             inputs: vec![
                 #(#dtype_inputs),*
             ],

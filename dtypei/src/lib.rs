@@ -1,46 +1,19 @@
 extern crate wasm_bindgen;
 
-// use wasm_bindgen::prelude::*;
 use serde::{Deserialize, Serialize};
-
-// #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
-// pub enum TypeRelation { Has, Link, Bytes }
-
-// #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
-// pub enum LangChoices { Solidity, JavaScript, Python, Rust }
-
-// #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
-// pub enum TypeChoices {
-//     BaseType,
-//     PayableFunction,
-//     StateFunction,
-//     ViewFunction,
-//     PureFunction,
-//     Event,
-//     MappingType,
-// }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct SubTypes {
     pub name: String,
     pub label: String,
-    // relation: TypeRelation,
     pub dimensions: Vec<i32>, // String[],
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Typei {
-    // lang: LangChoices,  // required
-    // pub type_choice: TypeChoices,  // required
     pub type_choice: String,  // TODO: enum
-    // contractAddress: address,
-    // source: bytes32,
-    pub name: String,  // required
-    // required types
-    pub inputs: Vec<SubTypes>,  // required
-    // optional types
-    // optionals: SubTypes[],
-    // function outputs
+    pub name: String,
+    pub inputs: Vec<SubTypes>,
     pub outputs: Vec<SubTypes>,
 }
 
@@ -58,28 +31,12 @@ impl ModuleInterface {
 
     pub fn get(&self) -> Vec<Typei> {
         self.interface.to_vec()
-        // self.interface.into_iter().collect()
     }
 
     pub fn add(&mut self, export: Typei) {
         self.interface.push(export);
     }
 }
-
-// static mut INTERFACES: Vec<Typei> = Vec::new();
-//
-// pub fn get() -> Vec<Typei> {
-//     unsafe {
-//         INTERFACES.to_vec()
-//     }
-// }
-//
-// pub fn add(export: Typei) {
-//     unsafe {
-//         INTERFACES.push(export);
-//     }
-// }
-
 
 static mut INTERFACE_STR: Vec<String> = Vec::new();
 pub fn istrget() -> Vec<String> {

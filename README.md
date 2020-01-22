@@ -2,7 +2,7 @@
 
 Build interface description objects for your Rust exports.
 
-This is an in-work project and the current version has no safeness guarantees.
+This is a work-in-progress. The current version has no safety-guarantees.
 Suggestions and contributions are welcome.
 
 Short video presentation: https://youtu.be/tkbo-cnlCKk - using `dtypei` built interfaces to create programmatic UIs & enforce proper type checking for Wasm modules, in JavaScript.

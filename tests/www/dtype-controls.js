@@ -2,15 +2,49 @@ import {dT as dtype, showControl, guiRegister} from "@pipeos/dtype-controls";
 
 let dT = dTExtend(dtype);
 
-function setInputs(functioni, domId, callback) {
-  let inputs = {value: [], type: {}, name: 'inputs'}
+let typeMap = {};
 
-  functioni.inputs.forEach(inp => {
-    inputs.type[inp.label] = inp.name;
-    inputs.value.push(null);
+function populateDataDefs(dT, minterface) {
+  minterface.forEach(functioni => {
+    if (dT.controls[functioni.name]) return;
+
+    switch (functioni.type_choice) {
+      case 'enum':
+        const variants = functioni.inputs.map(inp => inp.label);
+        dT.t.setEnum(functioni.name, variants);
+        typeMap[functioni.name] = 'enum:' + functioni.name;
+        break;
+      case 'struct':
+        const obj = {};
+        functioni.inputs.forEach(inp => {
+          obj[inp.label] = typeMap[inp.name] || inp.name;
+        });
+        dT.t.setComposite(functioni.name, obj);
+        typeMap[functioni.name] = functioni.name;
+        break;
+    }
   });
+  return dT;
+}
 
-  inputs = dT.t.apply(inputs, "random")
+function setInputs(functioni, domId, callback, callbackTerminal, minterface, inputs) {
+  dT = populateDataDefs(dT, minterface)
+  console.log(dT)
+  console.log(dT.enum_choices)
+
+  // let inputs = {value: [], type: {}, name: 'inputs'}
+
+  if (!inputs) {
+    inputs = {value: [], type: {}, name: 'inputs'}
+    functioni.inputs.forEach(inp => {
+      const name = typeMap[inp.name] || inp.name;
+      inputs.type[inp.label] = inp.name;
+      inputs.value.push(null);
+    });
+
+    inputs = dT.t.apply(inputs, "random")
+  }
+
   inputs.name = 'inputs';
 
   const inputControls = showControl(inputs, domId, {
@@ -25,12 +59,16 @@ function setInputs(functioni, domId, callback) {
       {type: "button", label: functioni.signature, action: async () => {
         console.log('-- run', inputs);
         callback(inputs);
+      }},
+      {type: "button", label: "Terminal: " + functioni.signature, action: async () => {
+        console.log('-- run', inputs);
+        callbackTerminal(inputs);
       }}
     ]
   });
 }
 
-function setOutputs(result, domId) {
+function setOutputs(result, domId, callbackOutput) {
   const guiOptions = {gui: {align: 'right'}, buttons: [
     {type: "button", label: "copy", action: async () => {
       console.log('copy');
@@ -44,6 +82,15 @@ function setOutputs(result, domId) {
     outputs.type[inp.label] = inp.name;
     outputs.value.push(inp.value);
   });
+
+  if (callbackOutput) {
+    guiOptions.buttons.push({
+      type: "button", label: "use as input", action: async () => {
+        callbackOutput(outputs);
+      }
+    })
+  }
+
   showControl(outputs, domId, guiOptions);
 }
 
@@ -100,7 +147,8 @@ function dTExtend(dT) {
 
   dT.controls["u64"] = Object.assign({}, dT.controls["int32"], {
     min: () => new dT.BN(0),
-    max: () => new dT.BN(18446744073709551615),
+    max: () => new dT.BN(4294967295),
+    // max: () => new dT.BN(18446744073709551615),
   })
 
   dT.controls["f64"] = dT.controls["i64"]

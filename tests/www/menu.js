@@ -1,33 +1,45 @@
-export function initMenu(interfaces, callback) {
+export function initModuleMenu(moduleName, modulei, iconMap, callback) {
+  const menubar = document.getElementById('menubar');
+  const menuItem = document.createElement('div');
+  const menuLabel = document.createElement('span');
+  menuLabel.setAttribute('class', 'menuLabel');
+  menuLabel.innerHTML = `<i class="material-icons icon">extension</i> ${moduleName}`;
 
-  console.log('interfaces', interfaces);
-  Object.keys(interfaces).forEach(moduleName => {
-    const modulei = interfaces[moduleName];
-    const menubar = document.getElementById('menubar');
-    const menuItem = document.createElement('div');
+  const menuDropDown = document.createElement('div');
 
-    const menuLabel = document.createElement('span');
-    menuLabel.setAttribute('class', 'menuLabel');
-    menuLabel.innerText = moduleName;
+  modulei.forEach(functioni => {
+    const link = document.createElement('a');
+    link.href = '#';
+    link.innerHTML = `<i class="material-icons icon">${iconMap[functioni.type_choice]}</i>${functioni.signature}`;
+    link.onclick = () => {
+      callback(moduleName, functioni);
+    }
 
-    const menuDropDown = document.createElement('div');
-
-    modulei.forEach(functioni => {
-      const link = document.createElement('a');
-      link.href = '#';
-      link.innerText = functioni.signature;
-      link.onclick = () => {
-        callback(moduleName, functioni);
-      }
-
-      menuDropDown.appendChild(link);
-    })
-
-    menuItem.appendChild(menuLabel);
-    menuItem.appendChild(menuDropDown);
-    menubar.appendChild(menuItem);
+    menuDropDown.appendChild(link);
   })
 
+  menuItem.appendChild(menuLabel);
+  menuItem.appendChild(menuDropDown);
+  menubar.appendChild(menuItem);
+
+
+  if (HTMLCollection.prototype.forEach === undefined) { HTMLCollection.prototype.forEach = [].forEach }
+
+  function showMenu(e) { closeAllMenus(); this.classList.add('activeMenu'); e.stopPropagation() }
+
+  function closeAllMenus() { document.getElementsByClassName('activeMenu').forEach(function (node) { node.classList.remove('activeMenu') }) }
+
+  document.getElementsByClassName('menuLabel').forEach(function(node) { node.onclick = showMenu })
+}
+
+export function initMenu(interfaces, iconMap, callback) {
+  Object.keys(interfaces).forEach(moduleName => {
+    initModuleMenu(moduleName, interfaces[moduleName], iconMap, callback);
+  });
+  initMenuBehaviour();
+}
+
+export function initMenuBehaviour() {
   // https://github.com/morgan3d/misc/tree/master/jsmenu
 
   // Polyfill
@@ -49,7 +61,7 @@ export function initMenu(interfaces, callback) {
   var style = document.createElement('style')
   style.type = 'text/css'
   style.innerHTML =`
-  #m {position:absolute;top:43px;font-size:13px;user-select:none}
+  #m {position:relative;top:43px;font-size:13px;user-select:none}
 
   #m div{display:inline-block;vertical-align:top}
 

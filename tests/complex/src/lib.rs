@@ -16,6 +16,15 @@ pub enum Material {
     Plastic,
 }
 
+// #[wasm_bindgen]
+// #[dtypei_enum()]
+// #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
+// pub enum Material {
+//     Custom(String),
+//     Mix(i32, i32, i32),
+//     Coop {frame: MaterialBase, body: MaterialBase},
+// }
+
 #[wasm_bindgen]
 #[dtypei_enum()]
 #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
@@ -38,7 +47,7 @@ pub struct WoodFinish {
 #[dtypei_struct()]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Table {
-    private_id: u64,
+    pub private_id: u64,
     pub legs: u8,
     // pub design_name: String,
     pub color: Color,

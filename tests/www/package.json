@@ -25,10 +25,16 @@
   },
   "homepage": "https://github.com/rustwasm/create-wasm-app#readme",
   "dependencies": {
-    "@pipeos/dtype-controls": "file:../../../pipeline/packages/packages/dtype-controls",
-    "mathi": "file:../mathi/pkg",
+    "save-file": "^2.3.1",
+    "text-table": "^0.2.0",
+    "idb-keyval": "^3.2.0",
+    "@pipeos/dtype-controls": "file:../../../../ETH/pipeline/packages/packages/dtype-controls",
+    "@wasmer/wasm-terminal": "^0.6.0",
+    "@wasmer/wasm-transformer": "^0.6.0",
+    "complex": "file:../complex/pkg",
     "lib2": "file:../lib2/pkg",
-    "complex": "file:../complex/pkg"
+    "mathi": "file:../mathi/pkg",
+    "dtypei-wrapper": "file:../../dtypei-wrapper/pkg"
   },
   "devDependencies": {
     "hello-wasm-pack": "^0.1.0",

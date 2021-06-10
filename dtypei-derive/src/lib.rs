@@ -28,9 +28,11 @@ pub fn dtypei_attr(args: TokenStream, input: TokenStream) -> TokenStream {
     let dtype_func = function_parse::parse(&functiont);
 
     dtypei::istradd(format!("{}", dtype_func));
+    // dtypei::INTERFACE_STR2.add(format!("{}", dtype_func));
 
     if inputstr.contains("typedinterface") {
         let interf = dtypei::istrget().into_iter().map(|item| {
+        // let interf = dtypei::INTERFACE_STR.istrget().into_iter().map(|item| {
             let tokenized: proc_macro2::TokenStream = item.parse().unwrap();
             tokenized
         });
@@ -55,6 +57,7 @@ pub fn dtypei_struct(args: TokenStream, input: TokenStream) -> TokenStream {
     let dtype_struct = structure_parse::parse(&structt);
 
     dtypei::istradd(format!("{}", dtype_struct));
+    // dtypei::INTERFACE_STR.istradd(format!("{}", dtype_struct));
 
     TokenStream::from(quote!(#structt))
 
@@ -68,6 +71,7 @@ pub fn dtypei_enum(args: TokenStream, input: TokenStream) -> TokenStream {
     let dtype_enum = enum_parse::parse(&enumt);
 
     dtypei::istradd(format!("{}", dtype_enum));
+    // dtypei::INTERFACE_STR.istradd(format!("{}", dtype_enum));
 
     TokenStream::from(quote!(#enumt))
 }

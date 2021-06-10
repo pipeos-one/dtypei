@@ -5,32 +5,38 @@
     <title>Hello wasm-pack!</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./node_modules/@wasmer/wasm-terminal/lib/xterm/xterm.css"
+    />
+    <style>
+      [class^="guify-"] {
+        font-size: 16px;
+      }
+    </style>
   </head>
   <body style="font-family: Helvetica, Arial, sans-serif; margin: 0">
     <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
     <script src="./bootstrap.js"></script>
 
-    <div id="menubar" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 100%; padding-left: 40px; z-index: 10000;">
-      <!-- <div>
-        <span class="menuLabel">File</span>
-        <div class="menuDropDown">
-          <a href="#">Open...<span class="hotkey">Ctrl+O</span></a>
-          <a href="#"><i class="material-icons icon">print</i>Print...</a>
-          <hr>
-          <a href="#"><i class="material-icons icon">delete</i>Delete</a>
-        </div>
-      </div>
-      <div><span class="menuLabel">Edit</span>
-        <div class="menuDropDown">
-          <a href="#">Insert...</a>
-        </div>
-      </div>
-      <div><span class="menuLabel">View</span></div>
-      <div><span class="menuLabel">Help</span></div> -->
+    <div id="menubar" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 100%; padding-left: 40px; z-index: 10000; font-size: 18px;">
     </div>
-    <div class="content" style="margin-top: 100px;">
-      <div id="controlInputs" style="width:50%;"></div>
-      <div id="controlOutputs" style="width:50%;"></div>
+    <div class="controls_content" style="padding-top: 50px;">
+      <div id="controlInputs" style="width:50%; font-size: 16px;"></div>
+      <div id="controlOutputs" style="width:50%; font-size: 16px;"></div>
+    </div>
+    <div id="wrapperize" style="padding-left:5px;">
+      <textarea id="wasmInterface" rows="13" cols="70" placeholder="interface object"></textarea>
+      <div>
+        <input id="wasmName" type="text" placeholder="name" style="width: 100;"/>
+        <input id="wasmUrl" type="text" placeholder="url" style="width: 200px;"/>
+        <button id="loadWrappedWasm">load wrapped wasm</button>
+      </div>
+    </div>
+    <div class="wasmsh_content" style="margin-top: 25px;">
+      <div id="wasmsh"></div>
     </div>
   </body>
 </html>

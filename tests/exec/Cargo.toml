@@ -1,13 +1,10 @@
 [package]
-name = "dtypeitest"
+name = "exec"
 version = "0.1.0"
 authors = ["Loredana <loredana.cirstea@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+wasm-bindgen = "0.2"
 dtypei-derive = { path = "../../dtypei-derive" }
 dtypei = { path = "../../dtypei" }
-mathi = { path = "../mathi" }
-lib2 = { path = "../lib2" }
-complex = { path = "../complex" }
-dtype-storage = { path = "../dtype-storage" }
